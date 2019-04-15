@@ -8,6 +8,7 @@ php artisan migrate --seed
 chmod 777 -R storage
 chmod 777 -R public
 chmod 777 -R bootstrap
+npm install
 npm run watch
 exit
 ```
