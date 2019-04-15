@@ -16,12 +16,7 @@ class FeatureValue extends TranslatedModel
 
     public function products()
     {
-        return $this->morphedByMany(Product::class, 'target', 'feature_valuable');
-    }
-
-    public function productModifications()
-    {
-        return $this->morphedByMany(ProductModification::class, 'target', 'feature_valuable');
+        return $this->belongsToMany(Product::class);
     }
 
     public function getValueAttribute()

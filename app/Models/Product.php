@@ -4,20 +4,35 @@ namespace App\Models;
 
 class Product extends TranslatedModel
 {
-    protected $fillable = ['code', 'price'];
+    protected $appends = ['name'];
+
+    protected $fillable = ['parent_id', 'code', 'price'];
 
     public function modifications()
     {
-        return $this->hasMany(ProductModification::class);
+        return $this->hasMany(Product::class, 'parent_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'parent_id');
     }
 
     public function featureValues()
     {
-        return $this->morphToMany(FeatureValue::class, 'target', 'feature_valuable');
+        return $this->belongsToMany(FeatureValue::class);
     }
 
     public function getNameAttribute()
     {
-        return $this->translate(__('No name'));
+        $default = __('No name');
+
+        $name = $this->translate($default);
+
+        if (!$this->parent_id || $name !== $default){
+            return $name;
+        }
+
+        return $this->product->translate($default);
     }
 }

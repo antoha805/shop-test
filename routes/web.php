@@ -14,4 +14,4 @@
 Route::get('/', 'ProductController@index')->name('products.index');
 Route::get('/products/{code}', 'ProductController@show')->name('products.show');
 
-Route::get('/product-modifications/{id}', 'ProductModificationController@show')->where('id', '[0-9]+');
+Route::get('/product-modifications/{id}', 'ProductController@modification')->where('id', '[0-9]+');

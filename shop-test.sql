@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb:3306
--- Generation Time: Apr 15, 2019 at 01:36 AM
+-- Generation Time: Apr 15, 2019 at 03:54 AM
 -- Server version: 10.4.3-MariaDB-1:10.4.3+maria~bionic
 -- PHP Version: 7.2.14
 
@@ -40,35 +40,8 @@ CREATE TABLE `features` (
 --
 
 INSERT INTO `features` (`id`, `code`, `created_at`, `updated_at`) VALUES
-(1, 'color', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(2, 'size', '2019-04-15 00:42:01', '2019-04-15 00:42:01');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feature_valuable`
---
-
-CREATE TABLE `feature_valuable` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `feature_value_id` bigint(20) UNSIGNED NOT NULL,
-  `target_type` enum('product','product_modification') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `target_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `feature_valuable`
---
-
-INSERT INTO `feature_valuable` (`id`, `feature_value_id`, `target_type`, `target_id`) VALUES
-(1, 4, 'product', 1),
-(2, 2, 'product_modification', 1),
-(3, 1, 'product_modification', 2),
-(4, 5, 'product_modification', 2),
-(5, 2, 'product_modification', 3),
-(6, 3, 'product_modification', 3),
-(7, 1, 'product_modification', 4),
-(8, 5, 'product_modification', 4);
+(1, 'color', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(2, 'size', '2019-04-15 02:55:05', '2019-04-15 02:55:05');
 
 -- --------------------------------------------------------
 
@@ -89,11 +62,39 @@ CREATE TABLE `feature_values` (
 --
 
 INSERT INTO `feature_values` (`id`, `feature_id`, `code`, `created_at`, `updated_at`) VALUES
-(1, 1, 'white', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(2, 1, 'black', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(3, 2, 'small', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(4, 2, 'medium', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(5, 2, 'big', '2019-04-15 00:42:02', '2019-04-15 00:42:02');
+(1, 1, 'white', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(2, 1, 'black', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(3, 2, 'small', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(4, 2, 'medium', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(5, 2, 'big', '2019-04-15 02:55:05', '2019-04-15 02:55:05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feature_value_product`
+--
+
+CREATE TABLE `feature_value_product` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `feature_value_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `feature_value_product`
+--
+
+INSERT INTO `feature_value_product` (`id`, `feature_value_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, 4, 1, NULL, NULL),
+(2, 2, 2, NULL, NULL),
+(3, 1, 3, NULL, NULL),
+(4, 5, 3, NULL, NULL),
+(5, 2, 5, NULL, NULL),
+(6, 3, 5, NULL, NULL),
+(7, 1, 6, NULL, NULL),
+(8, 5, 6, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,9 +115,9 @@ CREATE TABLE `languages` (
 --
 
 INSERT INTO `languages` (`id`, `code`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'en', 'English', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(2, 'ru', 'Русский', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(3, 'ua', 'Українська', '2019-04-15 00:42:01', '2019-04-15 00:42:01');
+(1, 'en', 'English', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(2, 'ru', 'Русский', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(3, 'ua', 'Українська', '2019-04-15 02:55:05', '2019-04-15 02:55:05');
 
 -- --------------------------------------------------------
 
@@ -135,15 +136,14 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(604, '2014_10_12_000000_create_users_table', 1),
-(605, '2014_10_12_100000_create_password_resets_table', 1),
-(606, '2019_04_14_122720_create_products_table', 1),
-(607, '2019_04_14_122850_create_product_modifications_table', 1),
-(608, '2019_04_14_123047_create_features_table', 1),
-(609, '2019_04_14_123235_create_feature_values_table', 1),
-(610, '2019_04_14_123521_create_languages_table', 1),
-(611, '2019_04_14_123543_create_translations_table', 1),
-(612, '2019_04_14_172747_create_feature_valuable_table', 1);
+(677, '2014_10_12_000000_create_users_table', 1),
+(678, '2014_10_12_100000_create_password_resets_table', 1),
+(679, '2019_04_14_122720_create_products_table', 1),
+(680, '2019_04_14_123047_create_features_table', 1),
+(681, '2019_04_14_123235_create_feature_values_table', 1),
+(682, '2019_04_14_123521_create_languages_table', 1),
+(683, '2019_04_14_123543_create_translations_table', 1),
+(684, '2019_04_15_021054_create_feature_value_product_table', 1);
 
 -- --------------------------------------------------------
 
@@ -165,8 +165,9 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` decimal(8,2) NOT NULL,
+  `price` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -175,33 +176,13 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `code`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'zafpuNkoV0', '26.40', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(2, 'kjizPpQNKn', '120.67', '2019-04-15 00:42:02', '2019-04-15 00:42:02');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `product_modifications`
---
-
-CREATE TABLE `product_modifications` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `product_id` bigint(20) UNSIGNED NOT NULL,
-  `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `product_modifications`
---
-
-INSERT INTO `product_modifications` (`id`, `product_id`, `code`, `created_at`, `updated_at`) VALUES
-(1, 1, '6E2cSIveu5', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(2, 1, 'ZwDppxumsj', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(3, 2, 'lBcB2j5XzA', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(4, 2, '4fcYwBgSft', '2019-04-15 00:42:02', '2019-04-15 00:42:02');
+INSERT INTO `products` (`id`, `parent_id`, `code`, `price`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'ZofIKNhlAF', '26.40', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(2, 1, 'c3P0hSc7sg', '32.90', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(3, 1, 'xbF9sN6bn0', '31.60', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(4, NULL, 'CKRFidmqOm', '120.67', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(5, 4, 'kcvoyuM9hG', NULL, '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(6, 4, '8BMghAKL94', NULL, '2019-04-15 02:55:06', '2019-04-15 02:55:06');
 
 -- --------------------------------------------------------
 
@@ -224,33 +205,33 @@ CREATE TABLE `translations` (
 --
 
 INSERT INTO `translations` (`id`, `language_id`, `target_type`, `target_id`, `value`, `created_at`, `updated_at`) VALUES
-(1, 1, 'feature', 1, 'Color', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(2, 2, 'feature', 1, 'Цвет', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(3, 3, 'feature', 1, 'Колір', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(4, 1, 'feature_value', 1, 'White', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(5, 2, 'feature_value', 1, 'Белый', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(6, 3, 'feature_value', 1, 'Білий', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(7, 1, 'feature_value', 2, 'Black', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(8, 2, 'feature_value', 2, 'Черный', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(9, 3, 'feature_value', 2, 'Чорний', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(10, 1, 'feature', 2, 'Size', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(11, 2, 'feature', 2, 'Размер', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(12, 3, 'feature', 2, 'Розмір', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(13, 1, 'feature_value', 3, 'White', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(14, 2, 'feature_value', 3, 'Белый', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(15, 3, 'feature_value', 3, 'Білий', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(16, 1, 'feature_value', 4, 'Medium', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(17, 2, 'feature_value', 4, 'Средний', '2019-04-15 00:42:01', '2019-04-15 00:42:01'),
-(18, 3, 'feature_value', 4, 'Середній', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(19, 1, 'feature_value', 5, 'Big', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(20, 2, 'feature_value', 5, 'Большой', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(21, 3, 'feature_value', 5, 'Великий', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(22, 1, 'product', 1, 'Wallet', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(23, 2, 'product', 1, 'Кошелек', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(24, 3, 'product', 1, 'Гаманець', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(25, 1, 'product', 2, 'Suit', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(26, 2, 'product', 2, 'Костюм', '2019-04-15 00:42:02', '2019-04-15 00:42:02'),
-(27, 3, 'product', 2, 'Костюм', '2019-04-15 00:42:02', '2019-04-15 00:42:02');
+(1, 1, 'feature', 1, 'Color', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(2, 2, 'feature', 1, 'Цвет', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(3, 3, 'feature', 1, 'Колір', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(4, 1, 'feature_value', 1, 'White', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(5, 2, 'feature_value', 1, 'Белый', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(6, 3, 'feature_value', 1, 'Білий', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(7, 1, 'feature_value', 2, 'Black', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(8, 2, 'feature_value', 2, 'Черный', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(9, 3, 'feature_value', 2, 'Чорний', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(10, 1, 'feature', 2, 'Size', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(11, 2, 'feature', 2, 'Размер', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(12, 3, 'feature', 2, 'Розмір', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(13, 1, 'feature_value', 3, 'White', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(14, 2, 'feature_value', 3, 'Белый', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(15, 3, 'feature_value', 3, 'Білий', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(16, 1, 'feature_value', 4, 'Medium', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(17, 2, 'feature_value', 4, 'Средний', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(18, 3, 'feature_value', 4, 'Середній', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(19, 1, 'feature_value', 5, 'Big', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(20, 2, 'feature_value', 5, 'Большой', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(21, 3, 'feature_value', 5, 'Великий', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(22, 1, 'product', 1, 'Wallet', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(23, 2, 'product', 1, 'Кошелек', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(24, 3, 'product', 1, 'Гаманець', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(25, 1, 'product', 4, 'Suit', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(26, 2, 'product', 4, 'Костюм', '2019-04-15 02:55:05', '2019-04-15 02:55:05'),
+(27, 3, 'product', 4, 'Костюм', '2019-04-15 02:55:05', '2019-04-15 02:55:05');
 
 -- --------------------------------------------------------
 
@@ -281,18 +262,19 @@ ALTER TABLE `features`
   ADD UNIQUE KEY `features_code_unique` (`code`);
 
 --
--- Indexes for table `feature_valuable`
---
-ALTER TABLE `feature_valuable`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `feature_valuable_feature_value_id_foreign` (`feature_value_id`);
-
---
 -- Indexes for table `feature_values`
 --
 ALTER TABLE `feature_values`
   ADD PRIMARY KEY (`id`),
   ADD KEY `feature_values_feature_id_foreign` (`feature_id`);
+
+--
+-- Indexes for table `feature_value_product`
+--
+ALTER TABLE `feature_value_product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `feature_value_product_feature_value_id_foreign` (`feature_value_id`),
+  ADD KEY `feature_value_product_product_id_foreign` (`product_id`);
 
 --
 -- Indexes for table `languages`
@@ -318,15 +300,8 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `products_code_unique` (`code`);
-
---
--- Indexes for table `product_modifications`
---
-ALTER TABLE `product_modifications`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `product_modifications_code_unique` (`code`),
-  ADD KEY `product_modifications_product_id_foreign` (`product_id`);
+  ADD UNIQUE KEY `products_code_unique` (`code`),
+  ADD KEY `products_parent_id_foreign` (`parent_id`);
 
 --
 -- Indexes for table `translations`
@@ -353,16 +328,16 @@ ALTER TABLE `features`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `feature_valuable`
---
-ALTER TABLE `feature_valuable`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
 -- AUTO_INCREMENT for table `feature_values`
 --
 ALTER TABLE `feature_values`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `feature_value_product`
+--
+ALTER TABLE `feature_value_product`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -374,19 +349,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=613;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=685;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `product_modifications`
---
-ALTER TABLE `product_modifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -405,22 +374,23 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `feature_valuable`
---
-ALTER TABLE `feature_valuable`
-  ADD CONSTRAINT `feature_valuable_feature_value_id_foreign` FOREIGN KEY (`feature_value_id`) REFERENCES `feature_values` (`id`) ON DELETE CASCADE;
-
---
 -- Constraints for table `feature_values`
 --
 ALTER TABLE `feature_values`
   ADD CONSTRAINT `feature_values_feature_id_foreign` FOREIGN KEY (`feature_id`) REFERENCES `features` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `product_modifications`
+-- Constraints for table `feature_value_product`
 --
-ALTER TABLE `product_modifications`
-  ADD CONSTRAINT `product_modifications_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+ALTER TABLE `feature_value_product`
+  ADD CONSTRAINT `feature_value_product_feature_value_id_foreign` FOREIGN KEY (`feature_value_id`) REFERENCES `feature_values` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `feature_value_product_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `translations`

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductModificationsTable extends Migration
+class CreateFeatureValueProductTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateProductModificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_modifications', function (Blueprint $table) {
+        Schema::create('feature_value_product', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('feature_value_id');
+            $table->foreign('feature_value_id')->references('id')->on('feature_values')->onDelete('cascade');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->string('code', 10)->unique();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateProductModificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_modifications');
+        Schema::dropIfExists('feature_value_product');
     }
 }

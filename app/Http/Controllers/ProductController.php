@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
 
         return view('products.index', [
-            'products' => Product::with('translations.language')->get()
+            'products' => Product::with('translations.language')->whereNull('parent_id')->get()
         ]);
     }
 
@@ -31,9 +31,22 @@ class ProductController extends Controller
             //'modifications.featureValues.feature.translations.language'
             )
             ->where('code', $code)
+            ->whereNull('parent_id')
             ->firstOrFail();
 
         return view('products.show', compact('product'));
+    }
+
+    public function modification(Request $request, $id)
+    {
+        $productModification = Product::with(
+            'product.featureValues.feature.translations.language',
+            'featureValues.feature.translations.language')
+            ->where('id', $id)
+            ->whereNotNull('parent_id')
+            ->firstOrFail();
+
+        return $productModification;
     }
 
 }

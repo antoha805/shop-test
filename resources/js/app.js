@@ -20,7 +20,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('features', require('./components/Features.vue').default);
+Vue.component('product-features', require('./components/ProductFeatures.vue').default);
+Vue.component('product-main-info', require('./components/ProductMainInfo.vue').default);
 Vue.prototype.$eventHub = new Vue();
 
 /**
@@ -70,8 +71,18 @@ const app = new Vue({
                             }
                         }));
 
-                this.$eventHub.$emit('features-changed', features)
+                this.$eventHub.$emit('product-features-changed', features);
 
+                let mainInfo = {};
+
+                for (let fieldName of ['name', 'code', 'price']){
+
+                    mainInfo[fieldName] = response.data.parent_id
+                        ? ( response.data[fieldName] != null ? response.data[fieldName] : response.data.product[fieldName] )
+                        : response.data[fieldName]
+                }
+
+                this.$eventHub.$emit('product-main-info-changed', mainInfo);
             });
         },
     }

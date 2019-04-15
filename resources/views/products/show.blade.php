@@ -4,20 +4,20 @@
 
     <div class="container">
 
-        <h1>{{ __('Name') }}: {{ $product->name }}<br></h1>
-        <h2>{{ __('Code') }}: {{ $product->code }}<br></h2>
-        <h2>{{ __('Price') }}: ${{ $product->price }}<br></h2>
+        <product-main-info :info="{{
+                    json_encode($product->only(['name', 'code', 'price']))
+                    }}"></product-main-info>
 
         <h2>{{ __('Features') }}:</h2>
 
-        <features :features="{{
+        <product-features :features="{{
                     $product->featureValues->map(function ($item, $key) {
                         return [
                             'name' => $item->feature->name,
                             'value' => $item->value
                         ];
                     })->toJson()
-                }}"></features>
+                }}"></product-features>
 
         @if($product->modifications->count())
 

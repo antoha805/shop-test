@@ -15,8 +15,10 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('code', 10)->unique();
-            $table->decimal('price');
+            $table->decimal('price')->nullable();
             $table->timestamps();
         });
     }

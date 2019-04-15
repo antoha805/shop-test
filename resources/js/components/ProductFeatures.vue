@@ -19,7 +19,7 @@
 
         created(){
 
-            this.$eventHub.$on('features-changed', features => this.featuresInner = features);
+            this.$eventHub.$on('product-features-changed', features => this.featuresInner = features);
         },
 
         mounted(){

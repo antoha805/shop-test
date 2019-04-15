@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\Feature;
 use App\Models\FeatureValue;
 use App\Models\Product;
-use App\Models\ProductModification;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -32,8 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'feature' => Feature::class,
             'feature_value' => FeatureValue::class,
-            'product' => Product::class,
-            'product_modification' => ProductModification::class,
+            'product' => Product::class
         ]);
     }
 }

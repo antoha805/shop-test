@@ -22,8 +22,7 @@ class CreateTranslationsTable extends Migration
                 [
                     'feature',
                     'feature_value',
-                    'product',
-//                    'product_modification',
+                    'product'
                 ]
             );
             $table->unsignedInteger('target_id');

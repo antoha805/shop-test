@@ -17,6 +17,6 @@ abstract class TranslatedModel extends Model
 
         return $this->translations->first(function ($trans, $key) {
                 return $trans->language->code == Lang::getLocale();
-            })->value ?? __('No translation');
+            })->value ?? $default ?? __('No translation');
     }
 }

@@ -4,7 +4,6 @@ use App\Models\Feature;
 use App\Models\FeatureValue;
 use App\Models\Language;
 use App\Models\Product;
-use App\Models\ProductModification;
 use App\Models\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
@@ -77,8 +76,18 @@ class DatabaseSeeder extends Seeder
             ],
             'features' => ['size' => 'medium'],
             'modifications' => [
-                ['color' => 'black'],
-                ['color' => 'white', 'size' => 'big']
+                [
+                    'price' => 32.90,
+                    'features' => [
+                        'color' => 'black',
+                    ]
+                ],
+                [
+                    'price' => 31.60,
+                    'features' => [
+                        'color' => 'white', 'size' => 'big'
+                    ]
+                ]
             ]
         ],
         [
@@ -89,8 +98,16 @@ class DatabaseSeeder extends Seeder
                 'ua' => 'Костюм'
             ],
             'modifications' => [
-                ['color' => 'black', 'size' => 'small'],
-                ['color' => 'white', 'size' => 'big']
+                [
+                    'features' => [
+                        'color' => 'black', 'size' => 'small',
+                    ]
+                ],
+                [
+                    'features' => [
+                        'color' => 'white', 'size' => 'big'
+                    ]
+                ],
             ]
         ],
     ];
@@ -130,12 +147,13 @@ class DatabaseSeeder extends Seeder
 
                 collect($item['modifications'])->each(function ($item, $key) use ($product){
 
-                    $productModification = ProductModification::create([
-                        'product_id' => $product->id,
+                    $productModification = Product::create([
+                        'parent_id' => $product->id,
                         'code' => Str::random(10),
+                        'price' => $item['price'] ?? null
                     ]);
 
-                    $productModification->featureValues()->attach($this->getProductValueIds($item));
+                    $productModification->featureValues()->attach($this->getProductValueIds($item['features']));
                 });
             }
         });
